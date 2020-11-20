@@ -1,0 +1,21 @@
+version: "3"
+
+services: 
+  app:
+    # We have a service called app, within the build configuration,
+    # the context is the root directory.
+    build:
+      context: .
+    # Map port 8000 on our host/local to 8000 on our container.
+    ports:
+      - "8000:8000"
+    # Allows the updates in our local to get put into our container in real time.
+    # Any changes in our repo get auto-updated in the container; no restarting docker.
+    # Maps local ./app directory to the container /app.
+    volumes:
+      - ./app:/app
+    # This defines the commands run in our docker container on initiation.
+    # `>` pushes the script into the next line.
+    # `sh -c` means shell run command
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
