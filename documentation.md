@@ -18,7 +18,21 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
   * The `sh -c` is not required needed, just provides clarity.
 
 ### TravisCI
-* `travisci.org` synced my account and activated repo.
+* `travisci.org` synced my account and activated repo. This however didn't work. I had to setup up through `travisci.com` for it to work.
 * Created travisCI config file.
 * Added `flake8` to requirements.
 * Added `./app/.flake8` for some test ignores.
+
+### Configure Django custom user model
+* Create a core app by running `docker-compose run app sh -c "python manage.py startapp core"`
+  * Removed `tests.py` and `views.py`.
+  * Created `./app/core/tests/__init__.py` where tests will be. To enable multiple test modules. You can either have a `tests.py` or `/tests` not both.
+* Add core to `INSTALLED_APPS` in `settings.py`.
+* Created `test_models.py`.
+* To run tests: `docker-compose run app sh -c "python manage.py test"`.
+* Made migrations.
+* To make migrations: `docker-compose run app sh -c "python manage.py makemigrations core"`.
+  * `core` isn't always required. But sometimes `makemigrations` doesn't work that you need to specify the app.
+* Normalized email address in UserManager.
+* Email validation field.
+* Create superuser through `create_superuser` function.
