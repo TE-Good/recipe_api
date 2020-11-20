@@ -30,9 +30,11 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Add core to `INSTALLED_APPS` in `settings.py`.
 * Created `test_models.py`.
 * To run tests: `docker-compose run app sh -c "python manage.py test"`.
+  * you can add `...manage.py test && flake8"` into the above command for linting.
 * Made migrations.
 * To make migrations: `docker-compose run app sh -c "python manage.py makemigrations core"`.
   * `core` isn't always required. But sometimes `makemigrations` doesn't work that you need to specify the app.
 * Normalized email address in UserManager.
 * Email validation field.
 * Create superuser through `create_superuser` function.
+* Created the django admin class in `core/admin.py`, changing the list order, and what is displayed.
