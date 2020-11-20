@@ -1,0 +1,16 @@
+# We tell travis what language we're using, and a python version is can use.
+# It doesn't matter it's an earlier version, as our container will run 3.7 inside.
+language: python
+python:
+  - "3.6"
+
+# What services we need to use.
+services:
+  - docker
+
+# Before we run the script we install docker-compose
+before_script: pip install docker-compose
+
+# The script that runs, and if it fails the tests we get a notification.
+script:
+  - docker-compose run app sh -c "python manage.py test && flake8"
