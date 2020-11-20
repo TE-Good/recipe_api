@@ -17,3 +17,6 @@ REPOSITORY                         TAG                   IMAGE ID            CRE
 recipe_api_app                     latest                5f7c928c3ea2        2 minutes ago       85.4MB
 <none>                             <none>                f4a68fc26af1        24 minutes ago      85.4MB
 ```
+* To create the project in our docker image we run `docker-compose run app sh -c "django-admin.py startproject app ."`. The result is is creates the files within the repo.
+  * The project is created using the django-admin management command `start project` within our docker container.
+  * The `sh -c` is not required needed, just provides clarity.

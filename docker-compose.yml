@@ -2,6 +2,7 @@ version: "3"
 
 services: 
   app:
+    # container_name: test => This could work to define a name for your image.
     # We have a service called app, within the build configuration,
     # the context is the root directory.
     build:
@@ -16,6 +17,6 @@ services:
       - ./app:/app
     # This defines the commands run in our docker container on initiation.
     # `>` pushes the script into the next line.
-    # `sh -c` means shell run command
+    # `sh -c` means shell script run command
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
