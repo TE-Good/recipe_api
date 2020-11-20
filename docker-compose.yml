@@ -17,6 +17,35 @@ services:
       - ./app:/app
     # This defines the commands run in our docker container on initiation.
     # `>` pushes the script into the next line.
-    # `sh -c` means shell script run command
+    # `sh -c` means shell script run command.
     command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db && 
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000"
+    # Setting environment variables
+    environment:
+      # Name of the other service 
+      - DB_HOST=db
+      # Name of our service
+      - DB_NAME=app
+      # Same user as db POSTGRES_USER
+      - DB_USER=postgres
+      # Same password as db POSTGRES_PASSWORD
+      - DB_PASS=supersecretpassword
+    
+    # Makes our app service depend on the db service.
+    # Means the db service will start before app.
+    # Means db service will be available to the app service through the host name db,
+    # as we've set within the environment variables above. So we can connect to db.
+    depends_on: 
+      - db
+  
+  db:
+    # Find the postgres image on dockerhub and pulls down the 10-alpine version.
+    # Postgres version 10-alpine (Linux Alpine - lightweight version of the image)
+    image: postgres:10-alpine
+    # Setting up environment variables (variables postgres is expecting).
+    environment: 
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=supersecretpassword

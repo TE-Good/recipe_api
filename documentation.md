@@ -1,3 +1,4 @@
+### Creating the new project
 * Created a `Dockerfile` and `requirements.txt`.
 * Ran `docker build .` => builds the image based upon the `Dockerfile` in the root directory. Naming the file `Dockerfile` is standard convention.
   * This created a docker image (found using `docker images`) with no name or tag.
@@ -17,7 +18,7 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
   * The project is created using the django-admin management command `start project` within our docker container.
   * The `sh -c` is not required needed, just provides clarity.
 
-### TravisCI
+### Setup automation
 * `travisci.org` synced my account and activated repo. This however didn't work. I had to setup up through `travisci.com` for it to work.
 * Created travisCI config file.
 * Added `flake8` to requirements.
@@ -38,3 +39,15 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Email validation field.
 * Create superuser through `create_superuser` function.
 * Created the django admin class in `core/admin.py`, changing the list order, and what is displayed.
+
+### Setup of Postgres
+* Added db and environment variables to `docker-compose.yml`.
+* Add dependency for postgres in `requirements.txt`.
+* Addition of temporary dependencies to `Dockerfile`.
+* Amended the `settings.py` variable `DATABASES` to be postgres and use our environnement variables that we setup in in the `docker-compose.yml`.
+
+### Ensure is database is running
+* Create `management/commands/wait_for_db.py` command to ensure that the database is running in our container before we start the project. This is being created because the author of the course found that `docker-compose` with `postgres` wasn't reliably finished running `postgres` before running the app, and there for erroring.
+* `__init__.py` is required in all directories you want to use as modules for importing.
+* Creating a new directory called `management` with a sub directory of `commands` and having a module per command is defined as standard practice by django.
+* Add `wait_for_db` and `migrate` commands to `docker-compose.yml`. To wait for the db to be available, then make database tables, then run the application.
