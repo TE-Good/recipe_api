@@ -51,3 +51,4 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * `__init__.py` is required in all directories you want to use as modules for importing.
 * Creating a new directory called `management` with a sub directory of `commands` and having a module per command is defined as standard practice by django.
 * Add `wait_for_db` and `migrate` commands to `docker-compose.yml`. To wait for the db to be available, then make database tables, then run the application.
+* Create superuser `docker-compose run app sh -c "python manage.py createsuperuser"`
