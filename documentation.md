@@ -20,3 +20,5 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 ### TravisCI
 * `travisci.org` synced my account and activated repo.
 * Created travisCI config file.
+* Added `flake8` to requirements.
+* Added `./app/.flake8` for some test ignores.
