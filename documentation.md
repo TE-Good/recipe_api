@@ -81,3 +81,7 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Created `IngredientSerializer` and `IngredientViewSet`, then registered in router.
 * Added `perform_create` in `IngredientViewSet` to ensure creation of ingredient.
 * Refactored duplicated code into a base class called `BaseRecipeAttrViewSet`
+* Created tests throughout.
+
+### Create recipe endpoint
+* Create `Recipe` model, make migration, and register to admin.
