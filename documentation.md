@@ -85,3 +85,4 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 
 ### Create recipe endpoint
 * Create `Recipe` model, make migration, and register to admin.
+* Created `RecipeSerializer`, `RecipeViewSet`, and router url.
