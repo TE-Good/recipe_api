@@ -52,3 +52,17 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Creating a new directory called `management` with a sub directory of `commands` and having a module per command is defined as standard practice by django.
 * Add `wait_for_db` and `migrate` commands to `docker-compose.yml`. To wait for the db to be available, then make database tables, then run the application.
 * Create superuser `docker-compose run app sh -c "python manage.py createsuperuser"`
+
+### Creating user management endpoints
+* Created new user app.
+  * This is done with `docker-compose run --rm app sh -c "python manage.py startapp user"`
+  * `--rm app` is used to exit the container out after the script is run.
+* Deleted files, and added to the apps in settings.
+* Created tests.
+* Ran tests using `docker-compose run --rm app sh -c "python manage.py test && flake8"`.
+* Created `UserSerializer`.
+* Created `CreateUserView`
+* Created and completed `user/urls.py` in user
+* Added `user.urls` path to `app/urls.py`
+* Created token tests.
+* Created `AuthTokenSerializer`, `CreateTokenView`, and put it in urls.
