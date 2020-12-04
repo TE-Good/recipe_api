@@ -66,3 +66,5 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Added `user.urls` path to `app/urls.py`
 * Created token tests.
 * Created `AuthTokenSerializer`, `CreateTokenView`, and put it in urls.
+* Made `PrivateUserApiTests`.
+* Created `ManagerUserView` and `update` in `UserSerializer`. Plus updated urls for `me`.
