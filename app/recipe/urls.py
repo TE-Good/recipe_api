@@ -6,11 +6,12 @@ from recipe import views
 # Router automatically generates URLS for viewsets
 # I assume depending list/detail and view names
 router = DefaultRouter()
-router.register('tags', views.TagViewSet)
+router.register("tags", views.TagViewSet)
+router.register("ingredients", views.IngredientViewSet)
 
-app_name = 'recipe'
+app_name = "recipe"
 
 urlpatterns = [
   # direct all urls into our router
-  path('', include(router.urls))
+  path("", include(router.urls))
 ]

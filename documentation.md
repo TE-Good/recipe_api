@@ -75,3 +75,7 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Created tests.
 * Created `TagSerializer`, `TagViewSet`, and created a router in `recipe/urls.py`.
 * Added path to `app/urls.py`.
+
+### Create ingredients endpoint
+* Added `Ingredient` model and registered + model test.
+* Created `IngredientSerializer` and `IngredientViewSet`, then registered in router.
