@@ -54,7 +54,7 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Create superuser `docker-compose run app sh -c "python manage.py createsuperuser"`
 
 ### Creating user management endpoints
-* Created new user app.
+* Created user app.
   * This is done with `docker-compose run --rm app sh -c "python manage.py startapp user"`
   * `--rm app` is used to exit the container out after the script is run.
 * Deleted files, and added to the apps in settings.
@@ -68,3 +68,10 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Created `AuthTokenSerializer`, `CreateTokenView`, and put it in urls.
 * Made `PrivateUserApiTests`.
 * Created `ManagerUserView` and `update` in `UserSerializer`. Plus updated urls for `me`.
+
+### Creating tags endpoint
+* Create recipe app, and register it in settings `INSTALLED_APPS`.
+* Created tag model and register it in `admin`, and made the migration.
+* Created tests.
+* Created `TagSerializer`, `TagViewSet`, and created a router in `recipe/urls.py`.
+* Added path to `app/urls.py`.

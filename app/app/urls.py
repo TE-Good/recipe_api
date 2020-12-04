@@ -19,5 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Any URL starting with `api/user/` we will pass to the user.urls
-    path('api/user/', include("user.urls"))
+    path('api/user/', include("user.urls")),
+    path('api/recipe/', include('recipe.urls'))
 ]
