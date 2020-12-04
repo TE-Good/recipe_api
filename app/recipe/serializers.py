@@ -46,3 +46,11 @@ class RecipeSerializer(serializers.ModelSerializer):
             "link"
         )
         read_only_fields = ("id",)
+
+
+# Extending the RecipeSerializer, and overriding variables
+class RecipeDetailSerializer(RecipeSerializer):
+    """Serialize a recipe detail"""
+    # Nesting a serializer to show all info
+    ingredients = IngredientSerializer(many=True, read_only=True)
+    tags = TagSerializer(many=True, read_only=True)
