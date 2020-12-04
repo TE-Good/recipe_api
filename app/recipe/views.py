@@ -6,42 +6,34 @@ from core.models import Tag, Ingredient
 from recipe import serializers
 
 
-class TagViewSet(
+class BaseRecipeAttrViewSet(
     viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin
 ):
-    """Manage tags in the database"""
+    """Base ViewSet for user owned recipe attributes"""
     # Requires token authentication is used
     authentication_classes = (TokenAuthentication,)
     # And the user is authenticated to use the API
     permission_classes = (IsAuthenticated,)
-    queryset = Tag.objects.all()
-    serializer_class = serializers.TagSerializer
 
     # Filters queryset by current authenticated user
     def get_queryset(self):
-        """Return objects for the current authenticated user"""
+        """Return objects for the current authenticated user only"""
         return self.queryset.filter(user=self.request.user).order_by("-name")
 
     # Hooks into the create process when creating an object
     # Setting the user to the authenticated user
     def perform_create(self, serializer):
-        """Create a new tag"""
+        """Create a new object"""
         serializer.save(user=self.request.user)
 
 
-class IngredientViewSet(
-    viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin
-):
+class TagViewSet(BaseRecipeAttrViewSet):
+    """Manage tags in the database"""
+    queryset = Tag.objects.all()
+    serializer_class = serializers.TagSerializer
+
+
+class IngredientViewSet(BaseRecipeAttrViewSet):
     """Manage ingredients in the database"""
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
     queryset = Ingredient.objects.all()
     serializer_class = serializers.IngredientSerializer
-
-    def get_queryset(self):
-        """Return objects for the current authenticated user"""
-        return self.queryset.filter(user=self.request.user).order_by("-name")
-
-    def perform_create(self, serializer):
-        """Create a new ingredient"""
-        serializer.save(user=self.request.user)
