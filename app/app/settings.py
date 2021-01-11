@@ -127,5 +127,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+# Where our static files will be dumped. Django's `collect_static_dump`.
+STATIC_ROOT = '/vol/web/static'
+# Where our media files will be stored.
+MEDIA_ROOT = '/vol/web/media'
 
 AUTH_USER_MODEL = 'core.User'

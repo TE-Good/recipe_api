@@ -88,3 +88,10 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
 * Created `RecipeSerializer`, `RecipeViewSet`, and router url.
 * Created `RecipeDetailSerializer` to extend `RecipeSerializer`.
 * Added `get_serializer_class` to `RecipeViewSet` to override the serializer.
+
+### Add upload image endpoint
+* Add Pillow to `requirements.txt`.
+* Amend the `Dockerfile`
+  * Add jpeg binaries to our dockerfile & build dependencies
+  * Create new volume folders and assign ownership
+* Add to `settings` and `app/urls` to include media and static info

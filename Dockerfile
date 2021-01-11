@@ -19,14 +19,14 @@ COPY ./requirements.txt /requirements.txt
 # `--no-cache` = dont store the registery index to our dockerfile, meaning less data
 # in our container which should be considered best practice. Want smallest footprint,
 # and less requirements and unknown issues.
-RUN apk add --update --no-cache postgresql-client
+RUN apk add --update --no-cache postgresql-client jpeg-dev
 
 # Install temporary packages (to create smallest footprint possible).
 # `--virtual` sets up an alias that we can use to remove to locate and remove later.
 # `\` is to continue the command on a new line for formatting.
 # These additional requirements where not trivially found, but through trial and error
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
-      gcc libc-dev linux-headers postgresql-dev
+      gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
 
 # Installs from the images requirements
 RUN pip install -r /requirements.txt
@@ -42,8 +42,22 @@ WORKDIR /app
 # Copy local app file to the container
 COPY ./app /app
 
+# Create a directory for our images
+RUN mkdir -p /vol/web/media
+
+# Create a directory for our static files
+RUN mkdir -p /vol/web/static
+
 # Creates a user (-D a use for running applications only).
 RUN adduser -D user
+
+# Sets ownership of the vol directories to our user
+# -R = recursive
+RUN chown -R user:user /vol
+
+# Owner(user) can do everything, and the rest can read and execute
+RUN chmod -R 755 /vol/web
+
 # Switches docker to the user
 # If this is not done, it runs from the root account. Not recommended.
 # Security wise, you'd have root access if someone got in.
