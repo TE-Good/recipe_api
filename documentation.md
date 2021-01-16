@@ -96,3 +96,8 @@ recipe_api_app                     latest                5f7c928c3ea2        2 m
   * Create new volume folders and assign ownership
 * Add to `settings` and `app/urls` to include media and static info
 * Added `recipe_image_file_path` to models and the image filed to the recipe model
+
+
+### Filtering
+* Added filtering to the `get_queryset` in `RecipeViewSet`.
+* Added more filtering with `get_queryset`.
